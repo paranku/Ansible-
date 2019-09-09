@@ -1,0 +1,6 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Debug Command
+      debug: 
+        msg: "OS_family = {{ansible_os_family}}"

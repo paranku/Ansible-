@@ -1,0 +1,21 @@
+# insted of giving particular name of package(example) for any task of package module we will assign seperate variable for including package so that we dont need to change on task filed
+
+
+- hosts: web
+  become: yes
+  #become_user: ubuntu 
+  vars: 
+    package_name: apache2
+    service: stopped
+    abability: absent
+    #service: stopped
+  tasks: 
+    - name: Stop {{package_name}}
+      service:
+        name: "{{package_name}}"
+        state : "{{service}}"
+
+    - name : install or remove "{{package_name}}"
+      apt:
+        name : "{{package_name}}"
+        state: "{{abability}}"

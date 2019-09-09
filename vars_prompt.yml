@@ -1,0 +1,37 @@
+## this is for asking the user to insert the type of service they want to install or remove (example package). This will give more flexibility for the user themself!!!
+
+
+- hosts: web
+  become: yes 
+  #  tasks: 
+  # - name: Display Host name
+  #   command: hostname
+  #   register: a
+  #
+  # - name: Display OS_family
+  #   debug:
+  #     msg: "OS_family = {{a.stdout}}"        
+  
+  vars_prompt:
+    - name: Package_name
+      prompt: "Enter your Package name"
+      private: no
+  tasks:
+          # - name: Display Host name
+          #     command: hostname
+          #register: a
+
+          # - name: Display OS_family
+          #debug:
+          #msg: "OS_family = {{a.stdout}}"    
+ 
+    - name: Install "{{ Package_name }}" package 
+      apt: 
+        name: "{{Package_name}}"
+        state: present
+
+    - name: Service  "{{ Package_name }}" start
+      service:
+        name:   "{{ Package_name }}"
+        state: started
+        enabled: yes 

@@ -1,0 +1,28 @@
+
+## for printing out the hostname date or any other command out put we can use register module with the help of debug command 
+- hosts: web 
+  become: yes
+  tasks:
+    - name: display hostname
+      command: hostname
+      register: y
+                                  
+    - name: display date
+      command: date
+      register: a
+                                                  
+    - name: Print Host name 
+      debug:
+        msg: "{{y}}"
+
+    - name: Print date 
+      debug: 
+        msg: "{{a}}"
+
+    - name: Print Host name
+      debug:
+        msg: "{{y.stdout}}"
+
+    - name: Print date
+      debug:
+        msg: "{{a.stdout}}"    

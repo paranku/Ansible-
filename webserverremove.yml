@@ -1,0 +1,7 @@
+- hosts: web
+  become: yes
+  tasks:
+    - name: stop service
+      service:
+        name: apache2
+        state: stopped
