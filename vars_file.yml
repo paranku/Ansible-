@@ -1,0 +1,20 @@
+# this is used when we manage seperate file for code and use seperate file for our package data or anyhitng that. just a calling refernece from another file.
+#
+ 
+
+
+- hosts: db  #localhost
+  become: yes
+  vars_files: 
+    - for_var_file.yml
+
+  tasks:
+    - name: Install "{{package_httpd}}"
+      package: 
+        name: "{{package_httpd}}"
+        state: present
+    - name: start service enable "{{package_httpd}}"
+      service:
+        name: "{{package_httpd}}"
+        state: started
+        enabled: yes
