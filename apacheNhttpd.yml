@@ -1,0 +1,64 @@
+- hosts: web
+  become: yes
+  tasks:
+    - name: Install apache2
+      apt:
+        name: apache2
+        state: present
+      tags: install
+
+    - name: Service start
+      service: 
+        name: apache2
+        state: started
+        enabled: yes
+      tags: services
+           
+    - name: create group
+      group:
+        name: Paras
+        state: present
+           
+    - name : create html file
+      copy:
+        dest: /var/www/html/1.html
+        content:
+          this is the test file for installing apache 
+          running apache 
+          creating html file
+          and write content on file
+    
+    - name: create file with content
+      copy:
+        dest: /var/www/html/2.txt
+        content:
+          this is my test file for web app
+          thank you 
+          will be happy if this works
+    
+    - name: Install id-utils for gid(group id)
+      apt: 
+        name: id-utils
+        state: present 
+
+
+- hosts: db
+  become: yes
+  tasks:
+    - name: Install httpd
+      package:
+        name: httpd
+        state: present
+  tags: install
+
+  #    - name: create file with content
+  #   copy:
+  #     dest: /var/www/html/2.html
+  #     content:
+  #       <html>
+  #         <h1>This is my test ansible file</h1>
+  #           <body>  this is my test file for web app</n>
+  #                   thank you</n>
+  #                   will be happy if this works
+  #           </body>
+  #        </html>
