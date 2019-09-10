@@ -1,0 +1,16 @@
+# this will help to execute (like installing package) at once rather then seperatly.
+
+
+- hosts: web
+  become: yes
+  tasks:
+    - name: Install web package
+      package:
+        name: "{{ item }}" 
+        state: present
+
+      with_items:
+        - apache2
+          #- httpd
+        - gcc 
+        - wget 

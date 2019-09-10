@@ -1,0 +1,14 @@
+# this will help to ignore error and help to sun the remaning part of code. If error occure at the top it came out of the code and exit but in some case we need to run code and re evalute error later.
+
+
+- hosts: web 
+  become: sudo 
+  tasks:
+    - name: hostname command code only
+      command: hostna
+      register: a
+      ignore_errors: yes
+
+    - name: Print result 
+      debug:
+        msg: "{{a.rc}}"

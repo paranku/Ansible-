@@ -1,0 +1,26 @@
+#this code will help us to get result with the condition. for simple example we can use same ignore code and apply when to so what. as below:
+
+
+- hosts: web
+  become: sudo
+  tasks:
+    - name: hostname command code only
+      command: hostnme
+      register: a
+      ignore_errors: yes
+
+    - name: when command is succeeded!!!
+      command: hostname
+      when: a is succeeded
+
+    - name: when command is failed 
+      package:
+        name: apache2 
+        state: present       
+      when: a is failed
+ 
+
+    - name: Print result
+      debug:
+        msg: "{{a}}"
+      when: a is success

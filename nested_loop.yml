@@ -1,0 +1,13 @@
+
+
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: print some value
+      debug:
+        msg: "Package name = {{item[0]}}, Action name= {{item[1]}}"
+
+      with_nested:
+        - {'httpd', 'wget'}
+        - {'install','update', 'review'} 
+
